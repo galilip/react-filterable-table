@@ -177,7 +177,6 @@ return /******/ (function(modules) { // webpackBootstrap
 			key: 'loadData',
 			value: function loadData(e) {
 				var _this2 = this;
-
 				if (e) {
 					e.preventDefault();
 				}
@@ -223,6 +222,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					serverError: false,
 					page: 0
 				});
+				console.log(entries);
 			}
 		}, {
 			key: 'updateFilter',
@@ -468,7 +468,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					noFilteredRecordsMessage: "There are no records to display",
 					stickySorting: false,
 					tableClassName: "table table-condensed table-hover filterable-table",
-					pageSizes: [10, 20, 30, 50]
+					pageSizes: [10, 20, 30, 50, 100]
 				};
 			}
 		}]);
@@ -535,6 +535,8 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 					return "fa fa-sort";
 				}
+				
+				
 				return null;
 			}
 		}, {
@@ -597,7 +599,9 @@ return /******/ (function(modules) { // webpackBootstrap
 					var tableTds = fields.map(function (field, q) {
 						// Use the displayName property if supplied, otherwise use name
 						var fieldDisplayName = field.displayName !== undefined ? field.displayName : field.name;
+						
 						var spanClassName = "";
+						
 						var tdClassName = field.tdClassName || null;
 
 						// Build out the body of the <td>
@@ -614,6 +618,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 						if (field.render && typeof field.render === "function") {
 							recordBody = field.render(renderProps);
+							console.log(recordBody);
 						}
 
 						// If tdClassName is a function, call it with our renderProps
@@ -632,20 +637,37 @@ return /******/ (function(modules) { // webpackBootstrap
 						// add the "empty" classname if record is empty
 						if (bodyIsEmpty) {
 							spanClassName = "empty";
+						}else {
+							if(field.name == 'ELEMENT' || field.name == 'CONTRE') {
+								spanClassName = recordBody;
+							}
 						}
 
 						if (!bodyIsEmpty && field.exactFilterable) {
 							spanClassName = "filterable";
 						}
-
-						var tdContent = hasValue(recordBody) ? _react2.default.createElement(
+						
+						if(field.name == 'CONTRE' || field.name == 'ELEMENT') {
+							console.log(field.name);
+							var tdContent = hasValue(recordBody) ? _react2.default.createElement(
+							'p',
+							{ className: spanClassName, onClick: field.exactFilterable ? function () {
+									return addExactFilter(getValue(record, field.name), field.name, fieldDisplayName);
+								} : null },
+							recordBody
+							) : null;
+						}else {
+							var tdContent = hasValue(recordBody) ? _react2.default.createElement(
 							'span',
 							{ className: spanClassName, onClick: field.exactFilterable ? function () {
 									return addExactFilter(getValue(record, field.name), field.name, fieldDisplayName);
 								} : null },
 							recordBody
 						) : null;
+						}
+						
 
+							
 						return _react2.default.createElement(
 							'td',
 							{ className: tdClassName, key: q },
@@ -819,7 +841,7 @@ return /******/ (function(modules) { // webpackBootstrap
 				// text can be overridden using the recordCountName and recordCountNamePlural props.
 
 				var recordCountMessage = _react2.default.createElement(
-					'span',
+					'p',
 					null,
 					recordCount,
 					' ',
@@ -834,7 +856,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							'option',
 							{ value: p, key: i },
 							p,
-							' per page'
+							' résultats par page'
 						);
 					})
 				) : null;
@@ -853,7 +875,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							_react2.default.createElement(
 								'span',
 								{ className: 'filter-container' },
-								_react2.default.createElement('input', { type: 'text', className: 'form-control filter-input', value: filter, onChange: this.filterChanged, ref: 'filter', placeholder: 'Filter', autoFocus: this.props.autofocusFilter }),
+								_react2.default.createElement('input', { type: 'text', className: 'form-control filter-input', value: filter, onChange: this.filterChanged, ref: 'filter', placeholder: 'Rechercher', autoFocus: this.props.autofocusFilter }),
 								_react2.default.createElement(
 									'span',
 									{ className: 'close clear-filter', onClick: function onClick() {
@@ -899,8 +921,8 @@ return /******/ (function(modules) { // webpackBootstrap
 			get: function get() {
 				// Set defaults if values weren't passed in
 				return {
-					recordCountName: "record",
-					recordCountNamePlural: "records"
+					recordCountName: "entree",
+					recordCountNamePlural: "entrées"
 				};
 			}
 		}]);
