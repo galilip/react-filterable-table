@@ -222,7 +222,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					serverError: false,
 					page: 0
 				});
-				console.log(entries);
+				//console.log(entries);
 			}
 		}, {
 			key: 'updateFilter',
@@ -618,7 +618,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 						if (field.render && typeof field.render === "function") {
 							recordBody = field.render(renderProps);
-							console.log(recordBody);
+							//console.log(recordBody);
 						}
 
 						// If tdClassName is a function, call it with our renderProps
@@ -648,7 +648,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						}
 						
 						if(field.name == 'CONTRE' || field.name == 'ELEMENT') {
-							console.log(field.name);
+							//console.log(field.name);
 							var tdContent = hasValue(recordBody) ? _react2.default.createElement(
 							'p',
 							{ className: spanClassName, onClick: field.exactFilterable ? function () {
