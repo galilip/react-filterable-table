@@ -222,7 +222,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					serverError: false,
 					page: 0
 				});
-				//console.log(entries);
+				console.log(entries);
 			}
 		}, {
 			key: 'updateFilter',
@@ -468,7 +468,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					noFilteredRecordsMessage: "There are no records to display",
 					stickySorting: false,
 					tableClassName: "table table-condensed table-hover filterable-table",
-					pageSizes: [10, 20, 30, 50, 100]
+					pageSizes: [10, 20, 30, 50, 100, 722]
 				};
 			}
 		}]);
@@ -618,7 +618,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 						if (field.render && typeof field.render === "function") {
 							recordBody = field.render(renderProps);
-							//console.log(recordBody);
+							console.log(recordBody);
 						}
 
 						// If tdClassName is a function, call it with our renderProps
@@ -648,7 +648,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						}
 						
 						if(field.name == 'CONTRE' || field.name == 'ELEMENT') {
-							//console.log(field.name);
+							console.log(field.name);
 							var tdContent = hasValue(recordBody) ? _react2.default.createElement(
 							'p',
 							{ className: spanClassName, onClick: field.exactFilterable ? function () {
@@ -841,7 +841,7 @@ return /******/ (function(modules) { // webpackBootstrap
 				// text can be overridden using the recordCountName and recordCountNamePlural props.
 
 				var recordCountMessage = _react2.default.createElement(
-					'p',
+					'i',
 					null,
 					recordCount,
 					' ',
@@ -878,10 +878,10 @@ return /******/ (function(modules) { // webpackBootstrap
 								_react2.default.createElement('input', { type: 'text', className: 'form-control filter-input', value: filter, onChange: this.filterChanged, ref: 'filter', placeholder: 'Rechercher', autoFocus: this.props.autofocusFilter }),
 								_react2.default.createElement(
 									'span',
-									{ className: 'close clear-filter', onClick: function onClick() {
+									{ className: 'close clear-filter fa fa-times', onClick: function onClick() {
 											return _this2.filterChanged('');
 										} },
-									'\xD7'
+									''
 								)
 							)
 						),
