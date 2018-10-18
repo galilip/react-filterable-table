@@ -639,7 +639,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							spanClassName = "empty";
 						}else {
 							if(field.name == 'ELEMENT' || field.name == 'CONTRE') {
-								spanClassName = recordBody;
+								tdClassName = recordBody;
 							}
 						}
 
@@ -654,9 +654,10 @@ return /******/ (function(modules) { // webpackBootstrap
 							{ className: spanClassName, onClick: field.exactFilterable ? function () {
 									return addExactFilter(getValue(record, field.name), field.name, fieldDisplayName);
 								} : null },
-							recordBody
+							
 							) : null;
 						}else {
+							console.log("field.name=>" + field.name + " et field.displayName=>" + fieldDisplayName);
 							var tdContent = hasValue(recordBody) ? _react2.default.createElement(
 							'span',
 							{ className: spanClassName, onClick: field.exactFilterable ? function () {
